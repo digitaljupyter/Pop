@@ -9,18 +9,6 @@ import { ArgumentParser } from 'argparse';
 import fetch from 'node-fetch'
 import { text as _text } from 'input';
 
-// const file = fs.createWriteStream("file.jpg");
-// const request = http.get("http://i3.ytimg.com/vi/J---aiyznGQ/mqdefault.jpg", function(response) {
-//    response.pipe(file);
-
-//    // after download completed close filestream
-//    file.on("finish", () => {
-//        file.close();
-//        console.log("Download Completed");
-//    });
-// });
-
-
 async function question(text, default_value) {
     const ans = await _text(text, { default: default_value });
 
