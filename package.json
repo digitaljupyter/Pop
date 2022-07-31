@@ -1,0 +1,22 @@
+{
+  "name": "pop",
+  "version": "0.0.1",
+  "description": "The Pop package manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kai Daniel Gonzalez",
+  "license": "GNU GPL v3",
+  "bin": {
+    "pop-pkg": "./index.mjs"
+  },
+  "dependencies": {
+    "argparse": "^2.0.1",
+    "axios": "^0.27.2",
+    "chalk": "^5.0.1",
+    "decompress": "^4.2.1",
+    "input": "^1.0.1",
+    "node-fetch": "^3.2.9"
+  }
+}
