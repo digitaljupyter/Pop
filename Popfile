@@ -1,0 +1,11 @@
+{
+    "name": "Pop package manager.",
+    "license": "GPLv3",
+    "depends_bins": [
+        "/usr/bin/node",
+        "/usr/bin/npm"
+    ],
+    "install_commands": [
+        "sudo npm link"
+    ]
+}
