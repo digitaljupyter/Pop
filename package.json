@@ -9,7 +9,7 @@
   "author": "Kai Daniel Gonzalez",
   "license": "GNU GPL v3",
   "bin": {
-    "pop-pkg": "./index.mjs"
+    "pop": "./index.mjs"
   },
   "dependencies": {
     "argparse": "^2.0.1",
