@@ -52,7 +52,7 @@ let popConf = JSON.parse(readFileSync(pop_conf));
 
 let pkg_exists = 0;
 
-console.log("resolving package...")
+console.log("resolving package(s)...")
 if (args.dir != null) {
     if (args.dir[args.dir.length - 1] == "/") args.dir = args.dir.substring(0, args.dir.length - 1)
 
@@ -82,7 +82,7 @@ if (args.dir != null) {
     }
 } else {
     let install_queue = {}
-
+    let successful_queue = []
     for (const branch in popConf.repos) {
         /*
         if (yn == "yes") {
@@ -98,8 +98,6 @@ if (args.dir != null) {
 
             let response = await fetch(popConf.repos[branch] + "/" + pkg, { method: "GET" })
             
-            console.log("gathering info for package '" + pkg + "` . . .")
-
             var twirlTimer = (function () {
                 var P = ["\\", "|", "/", "-"];
                 var x = 0;
@@ -126,12 +124,22 @@ if (args.dir != null) {
 
         if (install_queue[pkg]['exists'] == 0) {
             console.log(chalk.redBright("error: package '" + pkg + "' was not found."))
+        } else {
+            successful_queue.push(pkg)
         }
+    }
+    console.log("the following packages will be installed: \n\t" + chalk.blueBright(successful_queue.join(" ")));
+
+    let que = await question("would you like to continue?", "yes")
+
+    if (que == "no") {
+        console.log("alright. action abandoned.")
+        process.exit(0)
     }
     for (const pkg in install_queue) {
         if (install_queue[pkg]['exists'] == 1) {
             let response = await fetch(install_queue[pkg]['repository_link'] + "/" + pkg, { method: "GET" })
-            console.log("requesting package from servers & installing... ;-)")
+            console.log("downloading package - `" + pkg + "'")
             var twirlTimer = (function () {
                 var P = ["\\", "|", "/", "-"];
                 var x = 0;
