@@ -53,7 +53,6 @@ let popConf = JSON.parse(readFileSync(pop_conf));
 let pkg_exists = 0;
 
 console.log("resolving package...")
-console.log(args.pkg)
 if (args.dir != null) {
     if (args.dir[args.dir.length - 1] == "/") args.dir = args.dir.substring(0, args.dir.length - 1)
 
