@@ -27,7 +27,7 @@ let sample_pop_config = {
         "dax-stable": "https://raw.githubusercontent.com/thekaigonzalez/DaxRepo/stable",
         "core": "https://raw.githubusercontent.com/thekaigonzalez/DaxRepo/core"
     },
-    "bindir": "/usr/bin"
+    "bindir": "./packages"
 }
 
 const pkgcmds = parser.add_subparsers({ help: "Package Commands." })
@@ -97,7 +97,7 @@ if (args.dir != null) {
             let pkg = args.pkg[i];
 
             let response = await fetch(popConf.repos[branch] + "/" + pkg, { method: "GET" })
-            
+
             var twirlTimer = (function () {
                 var P = ["\\", "|", "/", "-"];
                 var x = 0;
@@ -116,17 +116,19 @@ if (args.dir != null) {
             clearInterval(twirlTimer)
         }
     }
-    for (const pkg in install_queue) {
+    for (let i = 0; i < args.pkg.length; ++i) {
+        let pkg = args.pkg[i]
         if (!(pkg in install_queue)) {
             install_queue[pkg] = {}
             install_queue[pkg]['exists'] = 0
         }
-
         if (install_queue[pkg]['exists'] == 0) {
             console.log(chalk.redBright("error: package '" + pkg + "' was not found."))
-        } else {
-            successful_queue.push(pkg)
+            delete install_queue[pkg]
         }
+    }
+    for (const pkg in install_queue) {
+        successful_queue.push(pkg)
     }
     console.log("the following packages will be installed: \n\t" + chalk.blueBright(successful_queue.join(" ")));
 
@@ -140,31 +142,18 @@ if (args.dir != null) {
         if (install_queue[pkg]['exists'] == 1) {
             let response = await fetch(install_queue[pkg]['repository_link'] + "/" + pkg, { method: "GET" })
             console.log("downloading package - `" + pkg + "'")
-            var twirlTimer = (function () {
-                var P = ["\\", "|", "/", "-"];
-                var x = 0;
-                return setInterval(function () {
-                    process.stdout.write("\r" + P[x++]);
-                    x &= 3;
-                }, 250);
-            });
 
-            var tt1 = twirlTimer()
 
             let bin = Buffer.from(await response.arrayBuffer())
-            
-            clearInterval(tt1)
 
             console.log('writing package to file . . .');
 
-            var tt2 = twirlTimer()
             if (popConf.bindir == null) popConf.bindir = "./"
 
             if (popConf.bindir[popConf.bindir.length - 1] == "/") popConf.bindir = popConf.bindir.substring(0, popConf.bindir.length - 1)
 
             writeFileSync(popConf.bindir + "/" + pkg, bin)
 
-            clearInterval(tt2)
 
             console.log(chalk.greenBright("done!"))
         }
