@@ -1,11 +1,23 @@
 #!/usr/bin/node
 
-import { get } from 'https'; // or 'https' for https:// URLs
-import { existsSync, writeFileSync, readFileSync, fstat, writeFile } from 'fs';
-import { homedir } from "os";
+import {
+    get
+} from 'https'; // or 'https' for https:// URLs
+import {
+    existsSync,
+    writeFileSync,
+    readFileSync,
+    fstat,
+    writeFile
+} from 'fs';
+import {
+    homedir
+} from "os";
 import decmprs from "decompress";
 import chalk from 'chalk';
-import { ArgumentParser } from 'argparse';
+import {
+    ArgumentParser
+} from 'argparse';
 import fetch from 'node-fetch'
 import { text as _text } from 'input';
 import { exec } from 'child_process';
@@ -106,7 +118,7 @@ if (args.dir != null) {
                     x &= 3;
                 }, 250);
             })();
-
+	    // Don't wanna have to update the package format again...
             if (response.status != 400 && response.status != 404) {
                 install_queue[pkg] = {}
 
