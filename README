@@ -1,3 +1,15 @@
-Pop package manager
+POP
 
-Pop is a simple package manager in a very early state right now.
+1.
+  Pop is a configurable installation framework primarily designed on linux, but should
+  have no problem running on other systems.
+
+  Pop is designed to be user friendly and configurable on every system.
+
+2.
+  In hindsight, pop seems very complicated/difficult to use, but that is
+  in fact not the case, Pop uses a ~/.pop configuration file in the JSON
+  file format for configuring the entire package manager.
+
+  Installation is guided by a "bindir" variable, which gives Pop information on
+  where to put the installed binaries.
