@@ -32,7 +32,6 @@ const parser = new ArgumentParser({
     description: 'POP is the package manager which can be configured for ANY system!'
 });
 
-
 let sample_pop_config = {
     "repos": {
         "dax-stable": "https://raw.githubusercontent.com/thekaigonzalez/DaxRepo/stable",
