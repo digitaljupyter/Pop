@@ -28,9 +28,8 @@ async function question(text, default_value) {
     return (ans)
 }
 
-
 const parser = new ArgumentParser({
-    description: 'POP is a package manager that aims to be a\nreplacement for KAP and DPKG On Kux.'
+    description: 'POP is the package manager which can be configured for ANY system!'
 });
 
 
@@ -49,7 +48,7 @@ let getlocal = pkgcmds.add_parser("build", {})
 
 
 action.add_argument("pkg", { help: "The package to (install)", nargs: "+" })
-getlocal.add_argument("dir", { default: null, help: "The directory to build using Popfile." })
+getlocal.add_argument("dir", { default: null, help: "The directory to build using Popfile."})
 
 let args = parser.parse_args();
 let pop_conf = homedir() + "/.pop"
@@ -65,6 +64,10 @@ let popConf = JSON.parse(readFileSync(pop_conf));
 let pkg_exists = 0;
 
 console.log("resolving package(s)...")
+
+if (args.pkg.length == 0) {
+	console.log("
+
 if (args.dir != null) {
     if (args.dir[args.dir.length - 1] == "/") args.dir = args.dir.substring(0, args.dir.length - 1)
 
