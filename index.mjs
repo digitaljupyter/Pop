@@ -173,3 +173,15 @@ if (args.dir != null) {
         }
     }
 }
+
+// _______________________________________ 
+/// if you have found this my child,      \
+//| consider yourself lucky! i made this  |
+//| program for all of the folks, who     |
+//\ wanted a packager that was not sucky! /
+// --------------------------------------- 
+//        \   ^__^
+//         \  (oo)\_______
+//            (__)\       )\/\
+//                ||----w |
+//                ||     ||
